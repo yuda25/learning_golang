@@ -11,14 +11,17 @@ func CreateProduct(c *gin.Context) {
 	// get data of req body
 	var body struct {
 		Name string
-		Stock int16
-		Price int32
+		Stock uint
+		Price uint
+		CodeProduct string
 	}
 
 	c.Bind(&body)
 
+	code := models.CodeProduct{Code: body.CodeProduct}
+
 	// create post
-	product := models.Product{Name: body.Name, Stock: body.Stock, Price: body.Price}
+	product := models.Product{Name: body.Name, Stock: body.Stock, Price: body.Price, CodeProduct: code}
 
 	result := initializers.DB.Create(&product)
 
@@ -35,7 +38,7 @@ func CreateProduct(c *gin.Context) {
 func GettAllProduct(c *gin.Context)  {
 	// get the products
 	var products []models.Product
-	initializers.DB.Find(&products)
+	initializers.DB.Preload("CodeProduct").Find(&products)
 
 	// return it
 	c.JSON(200, gin.H{
@@ -49,7 +52,7 @@ func GetById(c *gin.Context)  {
 
 	// get the products
 	var product []models.Product
-	initializers.DB.First(&product, id)
+	initializers.DB.Preload("CodeProduct").First(&product, id)
 
 	// return it
 	c.JSON(200, gin.H{
@@ -64,14 +67,14 @@ func UpdateProduct(c *gin.Context) {
 	// get data from req body
 	var body struct {
 		Name string
-		Stock int16
-		Price int32
+		Stock uint
+		Price uint
 	}
 	c.Bind(&body)
 
 	// find post were updating
 	var product []models.Product
-	initializers.DB.First(&product, id)
+	initializers.DB.Preload("CodeProduct").First(&product, id)
 
 	// update it
 	initializers.DB.Model(&product).Updates(models.Product{

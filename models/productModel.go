@@ -1,10 +1,11 @@
 package models
 
-import "gorm.io/gorm"
-
 type Product struct {
-	gorm.Model
-	Name string
-	Stock int16
-	Price int32
+	ID uint  `gorm:"primary_key"`
+	Name string `json:"name" gorm:"not null"`
+	Stock uint `json:"stock" gorm:"not null"`
+	Price uint `json:"price" gorm:"not null"`
+
+	CodeProductId uint `gorm:"ForeignKey:id"`
+	CodeProduct CodeProduct
 }
