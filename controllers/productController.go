@@ -51,7 +51,7 @@ func GetById(c *gin.Context)  {
 	id := c.Param("id")
 
 	// get the products
-	var product []models.Product
+	var product models.Product
 	initializers.DB.Preload("CodeProduct").First(&product, id)
 
 	// return it
