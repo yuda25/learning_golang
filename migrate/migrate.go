@@ -15,5 +15,6 @@ func main() {
 		&models.Category{},
 		&models.Product{},
 		&models.CodeProduct{},
+		&models.Provider{},
 	)
 }
