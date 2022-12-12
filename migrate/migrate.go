@@ -7,11 +7,12 @@ import (
 
 func init() {
 	initializers.LoadEnvVariables()
-	initializers.Connection()
+	initializers.Connection()  
 }
 
 func main() {
 	initializers.DB.AutoMigrate(
+		&models.Category{},
 		&models.Product{},
 		&models.CodeProduct{},
 	)

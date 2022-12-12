@@ -6,6 +6,11 @@ type Product struct {
 	Stock uint `json:"stock" gorm:"not null"`
 	Price uint `json:"price" gorm:"not null"`
 
+	// one to one
 	CodeProductId uint `gorm:"ForeignKey:id"`
 	CodeProduct CodeProduct
+
+	// one to many
+	CategoryId uint `gorm:"ForeignKey:id"`
+	Category Category `json:"categories"`
 }

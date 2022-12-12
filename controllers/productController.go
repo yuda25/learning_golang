@@ -14,6 +14,7 @@ func CreateProduct(c *gin.Context) {
 		Stock uint
 		Price uint
 		CodeProduct string
+		CategoryId uint
 	}
 
 	c.Bind(&body)
@@ -21,9 +22,9 @@ func CreateProduct(c *gin.Context) {
 	code := models.CodeProduct{Code: body.CodeProduct}
 
 	// create post
-	product := models.Product{Name: body.Name, Stock: body.Stock, Price: body.Price, CodeProduct: code}
+	product := models.Product{Name: body.Name, Stock: body.Stock, Price: body.Price, CodeProduct: code, CategoryId: body.CategoryId}
 
-	result := initializers.DB.Create(&product)
+	result := initializers.DB.Preload("Category").Preload("Category").Create(&product).Find(&product)
 
 	if result.Error != nil {
 		c.Status(400)
@@ -38,7 +39,7 @@ func CreateProduct(c *gin.Context) {
 func GettAllProduct(c *gin.Context)  {
 	// get the products
 	var products []models.Product
-	initializers.DB.Preload("CodeProduct").Find(&products)
+	initializers.DB.Preload("CodeProduct").Preload("Category").Find(&products)
 
 	// return it
 	c.JSON(200, gin.H{
@@ -52,7 +53,7 @@ func GetById(c *gin.Context)  {
 
 	// get the products
 	var product models.Product
-	initializers.DB.Preload("CodeProduct").First(&product, id)
+	initializers.DB.Preload("CodeProduct").Preload("Category").First(&product, id)
 
 	// return it
 	c.JSON(200, gin.H{
