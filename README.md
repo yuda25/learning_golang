@@ -26,3 +26,6 @@ go get -u golang.org/x/crypto/bcrypt
 
 <!-- jwt -->
 go get -u github.com/golang-jwt/jwt/v4
+
+<!-- gomail -->
+go get gopkg.in/gomail.v2
