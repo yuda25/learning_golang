@@ -20,3 +20,9 @@ go get -u gorm.io/driver/postgres
 
 <!-- migrate -->
 go run migrate/migrate.go
+
+<!-- bcrypt -->
+go get -u golang.org/x/crypto/bcrypt
+
+<!-- jwt -->
+go get -u github.com/golang-jwt/jwt/v4
