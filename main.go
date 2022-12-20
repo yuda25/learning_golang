@@ -15,6 +15,9 @@ func init() {
 
 func main() {
 	r := gin.Default()
+	r.MaxMultipartMemory = 8 << 20
+	r.POST("/upload", controllers.Upload)
+
 	r.POST("/create-product", middleware.RequireAuth, controllers.CreateProduct)
 	r.GET("/get-all", middleware.RequireAuth, controllers.GettAllProduct)
 	r.GET("/get-one/:id", middleware.RequireAuth, controllers.GetById)

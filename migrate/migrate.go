@@ -17,5 +17,6 @@ func main() {
 		&models.CodeProduct{},
 		&models.Provider{},
 		&models.User{},
+		&models.Upload{},
 	)
 }
