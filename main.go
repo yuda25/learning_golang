@@ -4,7 +4,6 @@ import (
 	"learning_golang/controllers"
 	"learning_golang/initializers"
 	"learning_golang/middleware"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -29,5 +28,10 @@ func main() {
 	r.GET("/auth/validate", middleware.RequireAuth, controllers.Validate)
 
 	r.POST("send-email", controllers.SendEmail)
+
+	r.POST("/create-excel", controllers.CreateExcel)
+	r.GET("/download-excel/:id", controllers.DownloadExcel)
+
 	r.Run()
 }
+

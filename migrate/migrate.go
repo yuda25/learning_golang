@@ -18,5 +18,6 @@ func main() {
 		&models.Provider{},
 		&models.User{},
 		&models.Upload{},
+		&models.Excel{},
 	)
 }

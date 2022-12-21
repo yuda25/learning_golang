@@ -29,3 +29,9 @@ go get -u github.com/golang-jwt/jwt/v4
 
 <!-- gomail -->
 go get gopkg.in/gomail.v2
+
+<!-- excel -->
+go get github.com/xuri/excelize/v2
+
+<!-- uuid -->
+go get github.com/google/uuid
